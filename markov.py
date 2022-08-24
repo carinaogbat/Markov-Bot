@@ -1,5 +1,4 @@
-import os 
-import discord
+
 """A Markov chain generator that can tweet random messages."""
 
 import sys
@@ -56,25 +55,29 @@ def make_text(chains):
 
     return ' '.join(words)
 
-
 # Get the filenames from the user through a command line prompt, ex:
 # python markov.py green-eggs.txt shakespeare.txt
-filenames = sys.argv[1:]
+# filenames = sys.argv[1:]
 
 # Open the files and turn them into one long string
-text = open_and_read_file(filenames)
+# text = open_and_read_file('green-eggs.txt')
 
 # Get a Markov chain
-chains = make_chains(text)
+# chains = make_chains(text)
 
+# response = make_text(chains)
+
+import os 
+import discord
+
+intents = discord.Intents.default()
+intents.messages = True
 
 client = discord.Client(intents=intents)
 
-
 @client.event
 async def on_ready():
-    print(f'Successfully connected! Logged in as {client.user}.')
-
+    print(f'We have logged in as {client.user}')
 
 @client.event
 async def on_message(message):
@@ -82,8 +85,7 @@ async def on_message(message):
         return
 
     if message.content.startswith('Hi Bot'):
-        await message.channel.send('Hello!')
+        await message.channel.send('Hi friend!')
 
-
-os.environ.get('DISCORD_TOKEN')
+# os.environ.get('DISCORD_TOKEN')
 client.run(os.environ['DISCORD_TOKEN'])
