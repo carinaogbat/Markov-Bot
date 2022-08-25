@@ -5,11 +5,11 @@ import sys
 from random import choice
 
 
-def open_and_read_file(filenames):
+def open_and_read_file(filename):
     """Take list of files. Open them, read them, and return one long string."""
 
     body = ''
-    for filename in filenames:
+    for file in filename:
         text_file = open(filename)
         body = body + text_file.read()
         text_file.close()
@@ -62,22 +62,24 @@ def make_text(chains):
 # Open the files and turn them into one long string
 # text = open_and_read_file('green-eggs.txt')
 
-# Get a Markov chain
+# # Get a Markov chain
 # chains = make_chains(text)
 
-# response = make_text(chains)
+# response = make_text(chains)pyt
+# print(response)
 
 import os 
 import discord
 
-intents = discord.Intents.default()
-intents.messages = True
 
-client = discord.Client(intents=intents)
+
+client = discord.Client()
+
 
 @client.event
 async def on_ready():
-    print(f'We have logged in as {client.user}')
+    print(f'Successfully connected! Logged in as {client.user}.')
+
 
 @client.event
 async def on_message(message):
@@ -85,7 +87,7 @@ async def on_message(message):
         return
 
     if message.content.startswith('Hi Bot'):
-        await message.channel.send('Hi friend!')
+        await message.channel.send("Hi")
 
 # os.environ.get('DISCORD_TOKEN')
 client.run(os.environ['DISCORD_TOKEN'])
